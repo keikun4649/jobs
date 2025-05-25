@@ -11,4 +11,9 @@
     @yield('content')
 </div>
 </body>
+<footer class="py-4 text-center">
+    <p><a href="https://github.com/keikun4649/jobs" target="_blank" class="text-muted">GitHub</a></p>
+    <a href="{{ route('admin.jobs.index') }}" class="text-muted">管理画面</a>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </html>
