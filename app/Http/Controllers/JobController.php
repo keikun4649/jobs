@@ -13,10 +13,18 @@ class JobController extends Controller
         return view('jobs.top', compact('categories'));
     }
 
-    public function index($category)
+    public function index(Request $request, $category)
     {
-        $jobs = Job::where('job_category', $category)->get();
-        return view('jobs.index', compact('jobs'));
+        $query = Job::where('job_category', $category);
+        if ($request->has('location')) {
+            $query->where('location', 'like', '%' . $request->location . '%');
+        }
+        if ($request->has('keyword')) {
+            $query->where('title', 'like', '%' . $request->keyword . '%');
+        }
+        $jobs = $query->orderBy('created_at', 'desc')->paginate(10);
+        $locations = Job::select('location')->distinct()->pluck('location');
+        return view('jobs.index', compact('jobs', 'category', 'locations'));
     }
 
     public function show($category, Job $job)
