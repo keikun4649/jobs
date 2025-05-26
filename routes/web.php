@@ -10,5 +10,5 @@ Route::get('/{category}/{job}', [JobController::class, 'show'])->name('jobs.show
 
 // 管理者用
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('/', JobAdminController::class);
+    Route::get('/', JobAdminController::class)->name('index');
 });
